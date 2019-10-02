@@ -1,0 +1,9 @@
+{   
+  "ignore": [
+    "angular/",
+    "react-js/",
+    "vanilla/",
+    "vue/",
+    "package.json"
+  ] 
+}
