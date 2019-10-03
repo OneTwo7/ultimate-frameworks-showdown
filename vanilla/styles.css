@@ -1,25 +1,59 @@
 body {
     margin: 20px;
     padding: 5px 50px;
+    text-align: center;
 }
 
-#chat {
-    box-sizing: border-box;
-    max-width: 500px;
-    min-height: 282px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
+h1 {
+    margin-bottom: 5rem;
 }
 
-#chat p {
-    margin: 0;
-    padding: 5px 15px;
+#table {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: wrap;
 }
 
-#chat p:nth-child(even) {
-    background-color: #eee;
+.square {
+    width: 25px;
+    height: 25px;
+    opacity: .75;
 }
 
-.sent-message {
-    color: #56f;
+.green {
+    background-color: green;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.cyan {
+    background-color: cyan;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.black {
+    background-color: black;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.red {
+    background-color: red;
+}
+
+.highlighted {
+    opacity: 1;
 }

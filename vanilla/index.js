@@ -1,50 +1,43 @@
 (function () {
-    const form = getById('form');
-    const input = getById('input');
-    const chat = getById('chat');
+    const table = getById('table');
 
     function getById (id) {
         return document.getElementById(id);
     }
 
-    function addMsg (msg, cls) {
-        const el = document.createElement('p');
+    function createSquare (square) {
+        const el = document.createElement('div');
+        el.className = 'square ' + square.color + (square.isHighlighted ? ' highlighted' : '');
+        el.id = 'square-' + square.id;
+        return el;
+    }
 
-        if (cls) {
-            el.className = cls;
-        }
+    function appendSquare (square) {
+        const el = createSquare(square);
+        table.appendChild(el);
+    }
 
-        el.textContent = msg;
-        chat.appendChild(el);
+    function replaceSquare (square) {
+        const el = getById('square-' + square.id);
+        el.className = 'square ' + square.color + (square.isHighlighted ? ' highlighted' : '');
     }
 
     try {
         const socket = io();
-        input.focus();
+        
+        socket.on('current state', squares => {
+            table.innerHTML = '';
 
-        socket.on('message', msg => {
-            addMsg(msg);
+            squares.forEach(square => {
+                appendSquare(square);
+            });
+        });
+
+        socket.on('square change', square => {
+            replaceSquare(square);
         });
 
         console.info('websocket connected');
-    
-        input.addEventListener('keydown', event => {
-            if (event.key === 'ENTER') {
-                form.submit();
-            }
-        });
-
-        form.addEventListener('submit', event => {
-            event.preventDefault();
-            const msg = input.value;
-
-            if (msg) {
-                addMsg(msg, 'sent-message');
-                socket.emit('message', msg);
-                console.info('message sent');
-                input.value = '';
-            }
-        });
     } catch (error) {
         console.error(error);
     }
